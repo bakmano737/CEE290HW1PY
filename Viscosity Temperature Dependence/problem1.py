@@ -33,3 +33,11 @@ x2 = (1/ambTemp)*measTemp
 x3 = (1/ambTemp**2)*np.multiply(measTemp, measTemp)
 X  = np.concatenate((x1.T,x2.T,x3.T),1)
 d  = np.log(measVisc)
+
+##########################
+#      The Solution      #
+##########################
+# m = ((X^T)X)^-1)(X^T)d #
+##########################
+m = np.linalg.inv(X.T*X)*X.T*d.T
+print(m)
