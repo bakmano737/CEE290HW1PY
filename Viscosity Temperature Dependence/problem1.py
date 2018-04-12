@@ -23,3 +23,13 @@ measVisc = np.matrix([1.79, 1.52, 1.31, 1.00, 0.80, 0.65, 0.55, 0.47, 0.40, 0.35
 ## System Invariant
 # Ambient Temperature
 ambTemp = 20.0
+
+#####################################
+# Define Model Matrices and Vectors #
+#####################################
+
+x1 = np.matrix(np.ones(11))
+x2 = (1/ambTemp)*measTemp
+x3 = (1/ambTemp**2)*np.multiply(measTemp, measTemp)
+X  = np.concatenate((x1.T,x2.T,x3.T),1)
+d  = np.log(measVisc)
