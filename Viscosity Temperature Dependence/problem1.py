@@ -76,3 +76,10 @@ p = 3  # Number of parameters
 ## Covariance = ssr/(n-p) * (X^TX)^-1
 cov = ssr/(n-p) * np.linalg.inv(X.T*X)
 print(cov)
+
+###########################
+# 95% Confidence Interval #
+# t(3,0.975) = 3.182      #
+###########################
+t3 = 3.182
+print(t3*cov.diagonal())
