@@ -48,4 +48,8 @@ print(m)
 
 # Model
 modelTemp = np.arange(100)
-lnmu = m[0] + m[1]/ambTemp*modelTemp + m[2]/ambTemp**2*np.multiply(modelTemp, modelTemp)
+lnmu = m[0,0] + (m[1,0]/ambTemp)*modelTemp + (m[2,0]/(ambTemp**2))*np.multiply(modelTemp, modelTemp)
+
+# Plot the simulation
+plt.plot(modelTemp, np.exp(lnmu))
+plt.show()
