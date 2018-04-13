@@ -41,3 +41,11 @@ d  = np.log(measVisc)
 ##########################
 m = np.linalg.inv(X.T*X)*X.T*d.T
 print(m)
+
+####################################
+# Plot the Model and Observed Data #
+####################################
+
+# Model
+modelTemp = np.arange(100)
+lnmu = m[0] + m[1]/ambTemp*modelTemp + m[2]/ambTemp**2*np.multiply(modelTemp, modelTemp)
