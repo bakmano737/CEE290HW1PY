@@ -32,14 +32,14 @@ x1 = np.matrix(np.ones(11))
 x2 = (1/ambTemp)*measTemp
 x3 = (1/ambTemp**2)*np.multiply(measTemp, measTemp)
 X  = np.concatenate((x1.T,x2.T,x3.T),1)
-d  = np.log(measVisc)
+d  = np.log(measVisc).T
 
 ##########################
 #      The Solution      #
 ##########################
 # m = ((X^T)X)^-1)(X^T)d #
 ##########################
-m = np.linalg.inv(X.T*X)*X.T*d.T
+m = np.linalg.inv(X.T*X)*X.T*d
 print(m)
 
 ####################################
@@ -50,7 +50,7 @@ print(m)
 modelTemp = np.arange(100)
 lnmu = m[0,0] + (m[1,0]/ambTemp)*modelTemp + (m[2,0]/(ambTemp**2))*np.multiply(modelTemp, modelTemp)
 
-# Plot the simulation
+""" # Plot the simulation
 fig, ax = plt.subplots()
 ax.plot(modelTemp, np.exp(lnmu), 'r', label='Model')
 # Plot the data
@@ -61,4 +61,25 @@ ax.plot(x, y, 'b+', label='Data')
 plt.xlabel('Temperature [C]')
 plt.ylabel('Viscosity [mPa*s]')
 ax.legend()
-plt.show()
+plt.show() """
+
+#################################
+# Compute the Covariance Matrix #
+#################################
+
+## Sum of Squared Residuals
+# SSR = (d-Xm)^T(d-Xm)
+ssr = ((d - X*m).T*(d - X*m))[0,0]
+print(ssr)
+n = 11 # Number of data points
+p = 3  # Number of parameters
+## Covariance = ssr/(n-p) * (X^TX)^-1
+cov = ssr/(n-p) * np.linalg.inv(X.T*X)
+print(cov)
+
+###########################
+# 95% Confidence Interval #
+# t(3,0.975) = 3.182      #
+###########################
+t3 = 3.182
+print(t3*cov.diagonal())
