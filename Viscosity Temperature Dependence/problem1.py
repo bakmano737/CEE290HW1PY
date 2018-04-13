@@ -50,7 +50,7 @@ print(m)
 modelTemp = np.arange(100)
 lnmu = m[0,0] + (m[1,0]/ambTemp)*modelTemp + (m[2,0]/(ambTemp**2))*np.multiply(modelTemp, modelTemp)
 
-""" # Plot the simulation
+# Plot the simulation
 fig, ax = plt.subplots()
 ax.plot(modelTemp, np.exp(lnmu), 'r', label='Model')
 # Plot the data
@@ -61,7 +61,7 @@ ax.plot(x, y, 'b+', label='Data')
 plt.xlabel('Temperature [C]')
 plt.ylabel('Viscosity [mPa*s]')
 ax.legend()
-plt.show() """
+plt.show()
 
 #################################
 # Compute the Covariance Matrix #
@@ -76,10 +76,3 @@ p = 3  # Number of parameters
 ## Covariance = ssr/(n-p) * (X^TX)^-1
 cov = ssr/(n-p) * np.linalg.inv(X.T*X)
 print(cov)
-
-###########################
-# 95% Confidence Interval #
-# t(3,0.975) = 3.182      #
-###########################
-t3 = 3.182
-print(t3*cov.diagonal())
