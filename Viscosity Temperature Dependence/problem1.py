@@ -83,3 +83,8 @@ print(cov)
 ###########################
 t3 = 3.182
 print(t3*cov.diagonal())
+
+################################################
+# Jacobian Matrix aka Sensitivity Matrix aka X #
+################################################
+print(X)
