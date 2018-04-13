@@ -51,5 +51,14 @@ modelTemp = np.arange(100)
 lnmu = m[0,0] + (m[1,0]/ambTemp)*modelTemp + (m[2,0]/(ambTemp**2))*np.multiply(modelTemp, modelTemp)
 
 # Plot the simulation
-plt.plot(modelTemp, np.exp(lnmu))
+fig, ax = plt.subplots()
+ax.plot(modelTemp, np.exp(lnmu), 'r', label='Model')
+# Plot the data
+x = np.array(measTemp[0]).reshape(11)
+y = np.array(measVisc[0]).reshape(11)
+ax.plot(x, y, 'b+', label='Data')
+# Axis labels and legend
+plt.xlabel('Temperature [C]')
+plt.ylabel('Viscosity [mPa*s]')
+ax.legend()
 plt.show()
